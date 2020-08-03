@@ -23,7 +23,7 @@
 </div>
 
 <!-- Administrator form - shows up only if the user is not already an administrator-->
-@if(!$user->isAdmin) 
+@if(!($user->isAdmin) && $admin->isAdmin)
 <div class="form-group{{ $errors->has('isAdmin') ? ' has-error' : '' }}">
     {!! Form::label('Is this user an administrator:') !!}
     <select class="form-control" name="isAdmin" id="isAdmin" value="True">

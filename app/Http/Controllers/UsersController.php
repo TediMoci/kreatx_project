@@ -105,8 +105,9 @@ class UsersController extends Controller
         }
 
         $user = User::find($id);
+        $admin = auth()->user();
         $allDepartments = Department::orderBy('title','asc')->pluck('title','id')->all();
-        return view('users.edit')->with('user', $user)->with('allDepartments', $allDepartments);
+        return view('users.edit')->with('user', $user)->with('allDepartments', $allDepartments)->with('admin', $admin);
     }
 
     /**
