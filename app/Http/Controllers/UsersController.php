@@ -137,7 +137,11 @@ class UsersController extends Controller
         }else{$user->department_id = 0;
         }
         //checks if user is administrator
-        if(!$user->isAdmin) $user->isAdmin = $request->input('isAdmin');
+        if(!$user->isAdmin && $request->input('isAdmin')!=null){
+            $user->isAdmin = $request->input('isAdmin');
+        }else{
+            $user->isAdmin = 0;
+        }
 
         $user->save();
         return redirect('/users')->with('success', 'User Updated');
