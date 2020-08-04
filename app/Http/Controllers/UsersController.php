@@ -105,9 +105,8 @@ class UsersController extends Controller
         }
 
         $user = User::find($id);
-        $admin = auth()->user();
         $allDepartments = Department::orderBy('title','asc')->pluck('title','id')->all();
-        return view('users.edit')->with('user', $user)->with('allDepartments', $allDepartments)->with('admin', $admin);
+        return view('users.edit')->with('user', $user)->with('allDepartments', $allDepartments);
     }
 
     /**
@@ -136,11 +135,15 @@ class UsersController extends Controller
             $user->department_id = $request->input('department_id');
         }else{$user->department_id = 0;
         }
-        //checks if user is administrator
-        if(!$user->isAdmin && $request->input('isAdmin')!=null){
+        //checks if user is administrator or not. 
+        if($request->input('isAdmin')!=null){
             $user->isAdmin = $request->input('isAdmin');
         }else{
-            $user->isAdmin = 0;
+            if(!$user->isAdmin) {
+                $user->isAdmin = 0;
+            }else{
+                $user->isAdmin = 1;
+            }
         }
 
         $user->save();
