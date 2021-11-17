@@ -24,7 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "ckeditor4": "^4.14.1",
+        "ckeditor4": "^4.17.0",
         "vuetify": "^2.3.6"
     }
 }
